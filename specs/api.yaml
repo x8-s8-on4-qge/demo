@@ -1,0 +1,24 @@
+openapi: "3.0.0"
+
+info:
+  version: 1.0.0
+  title: Hello World API
+  description: サンプルAPI
+
+servers:
+  - url: http://localhost/api
+
+paths:
+  /helloWorld:
+    get:
+      summary: 「Hello World」取得
+      operationId: helloWorld
+      tags:
+        - helloWorld
+      responses:
+        '200':
+          description: 「Hello World」返却
+          content:
+            text/plain:
+              schema:
+                type: string
