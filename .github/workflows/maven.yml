@@ -40,14 +40,17 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: 17
+          distribution: 'temurin'
+
+      # test
+      - name: test
+        run: |
+          pwd
+          ls -l
 
       # 3.Maven Install
       - name: Build with Maven
         run: ./mvnw clean install
-
-      # test
-      - name: test
-        run: ls -l
 
       # 4.Dockerイメージをビルド
       - name: Build Docker Image
