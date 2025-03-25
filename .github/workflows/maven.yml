@@ -26,67 +26,64 @@ jobs:
     # ランナー(OS)は、Linuxを指定
     runs-on: ubuntu-latest
 
-    # ビルドするので、書き込み権限を付与
-    permissions:
-      actions: write
-
     steps:
-      # 1.クローン
+      # クローン
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      # 2.Java設定
+      # Java設定
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: 17
           distribution: 'temurin'
 
-      # test
-      - name: test
-        run: |
-          pwd
-          ls -l
-          chmod +x ./mvnw
-          ls -l
-
-      # 3.Maven Install
+      # Maven Install
       - name: Build with Maven
-        run: ./mvnw clean install
+        run: |
+          chmod +x ./mvnw
+          ./mvnw clean install
 
-      # 4.Dockerイメージをビルド
+      # Dockerイメージをビルド
       - name: Build Docker Image
         run: |
           docker compose build
 
-#      # 5.Docker Hubにログイン
-#      - name: Log in to Docker Hub
-#        uses: docker/login-action@v3
-#        with:
-#          username: ${{ secrets.DOCKER_USERNAME }}
-#          password: ${{ secrets.DOCKER_PASSWORD }}
-#
-#      - name: Push Docker image to DockerHub
-#        run: |
-#          docker image tag demo x8s8on4qge/demo:latest
-#          docker image push x8s8on4qge/demo:latest
+      # 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-modules
+          path: ./
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      # Downloads the Render CLI binary and adds it to the PATH.
-      # To prevent breaking changes in CI/CD, we pin to a
-      # specific CLI version (in this case 1.1.0).
-      - name: Install Render CLI
+      # 5.Docker Hubにログイン
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push Docker image to DockerHub
         run: |
-          curl -L https://github.com/render-oss/cli/releases/download/v1.1.0/cli_1.1.0_linux_amd64.zip -o render.zip
-          unzip render.zip
-          sudo mv cli_v1.1.0 /usr/local/bin/render
-      - name: Trigger deploy with Render CLI
-        env:
-          # The CLI can authenticate via a Render API key without logging in.
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
-          CI: true
-        run: |
-          render deploys create ${{ secrets.RENDER_SERVICE_ID }} --output json --confirm
+          docker image tag demo x8s8on4qge/demo:latest
+          docker image push x8s8on4qge/demo:latest
+
+#  deploy:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#      # Downloads the Render CLI binary and adds it to the PATH.
+#      # To prevent breaking changes in CI/CD, we pin to a
+#      # specific CLI version (in this case 1.1.0).
+#      - name: Install Render CLI
+#        run: |
+#          curl -L https://github.com/render-oss/cli/releases/download/v1.1.0/cli_1.1.0_linux_amd64.zip -o render.zip
+#          unzip render.zip
+#          sudo mv cli_v1.1.0 /usr/local/bin/render
+#      - name: Trigger deploy with Render CLI
+#        env:
+#          # The CLI can authenticate via a Render API key without logging in.
+#          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+#          CI: true
+#        run: |
+#          render deploys create ${{ secrets.RENDER_SERVICE_ID }} --output json --confirm
