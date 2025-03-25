@@ -47,6 +47,8 @@ jobs:
         run: |
           pwd
           ls -l
+          git update-index --add --chmod=+x ./mvnw
+          ls -l
 
       # 3.Maven Install
       - name: Build with Maven
