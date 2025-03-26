@@ -1,11 +1,3 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: Docker CI/CD
 
 on:
@@ -49,14 +41,7 @@ jobs:
         run: |
           docker compose build
 
-      # 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: built-modules
-          path: ./
-
-      # 5.Docker Hubにログイン
+      # Docker Hubにログインし、イメージをプッシュ
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -70,22 +55,13 @@ jobs:
           push: true
           tags: x8s8on4qge/demo:latest
 
-#  deploy:
-#    needs: build
-#    runs-on: ubuntu-latest
-#    steps:
-#      # Downloads the Render CLI binary and adds it to the PATH.
-#      # To prevent breaking changes in CI/CD, we pin to a
-#      # specific CLI version (in this case 1.1.0).
-#      - name: Install Render CLI
-#        run: |
-#          curl -L https://github.com/render-oss/cli/releases/download/v1.1.0/cli_1.1.0_linux_amd64.zip -o render.zip
-#          unzip render.zip
-#          sudo mv cli_v1.1.0 /usr/local/bin/render
-#      - name: Trigger deploy with Render CLI
-#        env:
-#          # The CLI can authenticate via a Render API key without logging in.
-#          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
-#          CI: true
-#        run: |
-#          render deploys create ${{ secrets.RENDER_SERVICE_ID }} --output json --confirm
+      # 登録したイメージをRender.comにデプロイ
+      - name: Deploy Docker Image To Render.com
+        run: curl https://api.render.com/deploy/srv-cvhooptrie7s73e8t4d0?key=orpluDcf-p8&imgURL=docker.io%2Fx8s8on4qge%2Fdemo%3Alatest
+
+      # ビルドしたファイル一式をアップロード
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-modules
+          path: ./
