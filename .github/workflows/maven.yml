@@ -57,7 +57,7 @@ jobs:
 
       # 登録したイメージをRender.comにデプロイ
       - name: Deploy Docker Image To Render.com
-        run: curl https://api.render.com/deploy/srv-cvhooptrie7s73e8t4d0?key=orpluDcf-p8&imgURL=docker.io%2Fx8s8on4qge%2Fdemo%3Alatest
+        run: curl ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
 
       # ビルドしたファイル一式をアップロード
       - name: Upload Artifact
