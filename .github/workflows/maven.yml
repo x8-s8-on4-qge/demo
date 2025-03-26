@@ -63,10 +63,12 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Push Docker image to DockerHub
-        run: |
-          docker image tag demo x8s8on4qge/demo:latest
-          docker image push x8s8on4qge/demo:latest
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v6
+          with:
+            context: .
+            push: true
+            tags: x8s8on4qge/demo:latest
 
 #  deploy:
 #    needs: build
