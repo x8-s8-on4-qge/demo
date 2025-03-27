@@ -67,6 +67,12 @@
 			<artifactId>jackson-databind-nullable</artifactId>
 			<version>0.2.4</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+<!--			<version>8.0.2.Final</version>-->
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -127,19 +133,6 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			<!-- Licenses Maven Plugin -->
-			<plugin>
-				<groupId>com.mycila</groupId>
-				<artifactId>license-maven-plugin</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<header>${project.basedir}/license.txt</header> <!-- (1) -->
-					<excludes> <!-- (2) -->
-						<exclude>.mvn/**</exclude>
-						<exclude>mvnw*</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
