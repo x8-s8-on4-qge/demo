@@ -1,5 +1,5 @@
 # ベースイメージ
-FROM openjdk:17
+FROM eclipse-temurin:21
 
 # jarファイルコピー
 RUN mkdir /app
@@ -7,9 +7,7 @@ COPY ./entorypoint.sh /app
 COPY ./target/demo-*.jar /app/demo.jar
 
 # コンテナのポートを公開
-# （備忘メモ）
-#   ここで設定したポートが必ず公開されるという事ではなく、ドキュメント的な扱い。
-#   コンテナ起動時に設定するポートフォワードでの推奨ポート。
+# （備忘メモ）必ずここで設定したポートが公開されるということではないので注意
 EXPOSE 8080
 
 # アプリ起動
