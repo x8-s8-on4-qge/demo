@@ -78,11 +78,14 @@
 			<artifactId>wsdl4j</artifactId>
 		</dependency>
 		<dependency>
+<<<<<<< HEAD
 			<groupId>org.springframework.ws</groupId>
 			<artifactId>spring-ws-core</artifactId>
 			<version>4.0.12</version>
 		</dependency>
 		<dependency>
+=======
+>>>>>>> branch 'feature' of https://github.com/x8-s8-on4-qge/demo.git
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web-services</artifactId>
 		</dependency>
