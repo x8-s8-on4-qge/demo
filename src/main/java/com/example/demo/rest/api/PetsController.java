@@ -1,4 +1,4 @@
-package com.example.demo.api;
+package com.example.demo.rest.api;
 
 import java.util.List;
 import java.util.Map;
@@ -9,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.Pet;
+import com.example.demo.rest.api.PetsApi;
+import com.example.demo.rest.model.Pet;
+import com.example.demo.rest.exception.PetStoreException;
 
 @RestController
 public class PetsController implements PetsApi {
