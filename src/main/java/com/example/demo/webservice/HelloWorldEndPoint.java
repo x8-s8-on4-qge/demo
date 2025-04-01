@@ -13,7 +13,7 @@ public class HelloWorldEndPoint {
 	@ResponsePayload
 	public GetHelloWorldResponse getHelloWorld(@RequestPayload GetHelloWorldRequest request) {
 		GetHelloWorldResponse response = new GetHelloWorldResponse();
-		response.setMessage("Hello World via SOAP protocol!");
+		response.setMessage("Hello World via SOAP protocol.");
 
 		return response;
 	}
