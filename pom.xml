@@ -34,7 +34,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -71,10 +70,29 @@
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
-<!--			<version>8.0.2.Final</version>-->
+			<!--<version>8.0.2.Final</version>-->
+		</dependency>
+		<!-- Add for SOAP Web Service -->
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.ws</groupId>
+			<artifactId>spring-ws-core</artifactId>
+			<version>4.0.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/jaxb2-maven-plugin -->
+		<dependency>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>jaxb2-maven-plugin</artifactId>
+			<version>3.2.0</version>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -115,10 +133,10 @@
 							<inputSpec>${project.basedir}/specs/api.yaml</inputSpec>
 							<generatorName>spring</generatorName>
 							<cleanupOutput>true</cleanupOutput>
-							<output>${project.basedir}/generated</output>
-							<apiPackage>com.example.demo.api</apiPackage>
-							<modelPackage>com.example.demo.model</modelPackage>
-							<invokerPackage>com.example.demo.invoker</invokerPackage>
+							<output>${project.basedir}/generated/open_api</output>
+							<apiPackage>com.example.demo.rest.api</apiPackage>
+							<modelPackage>com.example.demo.rest.model</modelPackage>
+							<invokerPackage>com.example.demo.rest.invoker</invokerPackage>
 							<generateModelTests>false</generateModelTests>
 							<generateModelDocumentation>false</generateModelDocumentation>
 							<generateApiTests>false</generateApiTests>
@@ -133,6 +151,26 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>xjc</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<sources>
+						<source>${project.basedir}/src/main/resources/helloWorld.xsd</source>
+					</sources>
+					<packageName>com.example.demo.webservice</packageName>
+					<outputDirectory>${project.basedir}/generated/jaxb</outputDirectory>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

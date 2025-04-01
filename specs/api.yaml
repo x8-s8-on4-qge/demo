@@ -10,7 +10,7 @@ servers:
 
 paths:
   # HelloWorld
-  /helloWorld:
+  /helloWorld/rest:
     get:
       summary: 「Hello World」取得
       operationId: helloWorld
