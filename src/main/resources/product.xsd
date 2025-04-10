@@ -1,0 +1,91 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="https://demo-latest-owxa.onrender.com"
+	targetNamespace="https://demo-latest-owxa.onrender.com"
+	elementFormDefault="qualified">
+
+	<xs:complexType name="product">
+		<xs:sequence>
+			<xs:element name="product_id" type="xs:unsignedShort" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="price" type="xs:decimal" />
+			<xs:element name="description" type="xs:string" />
+			<xs:element name="created_at" type="xs:dateTime" />
+			<xs:element name="updated_at" type="xs:dateTime" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- 登録用 -->
+	<xs:element name="registProductRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="name" type="xs:string" />
+				<xs:element name="price" type="xs:decimal" />
+				<xs:element name="description" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="registProductResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- 参照用 -->
+	<xs:element name="getProductListRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="name" type="xs:string" />
+				<xs:element name="price" type="xs:decimal" />
+				<xs:element name="description" type="xs:string" />
+				<xs:element name="created_at" type="xs:dateTime" />
+				<xs:element name="updated_at" type="xs:dateTime" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getProductListResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="xs:boolean" />
+				<xs:element name="productList" type="tns:product" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- 更新用 -->
+	<xs:element name="updateProductRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="product_id" type="xs:unsignedShort" />
+				<xs:element name="name" type="xs:string" />
+				<xs:element name="price" type="xs:decimal" />
+				<xs:element name="description" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="updateProductResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- 削除用 -->
+	<xs:element name="deleteProductRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="product_id" type="xs:unsignedShort" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="deleteProductResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

@@ -1,6 +1,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:tns="http://spring.io/guides/gs-producing-web-service"
-	targetNamespace="http://spring.io/guides/gs-producing-web-service"
+	xmlns:tns="https://demo-latest-owxa.onrender.com"
+	targetNamespace="https://demo-latest-owxa.onrender.com"
 	elementFormDefault="qualified">
 
 	<xs:element name="getHelloWorldRequest">
@@ -18,4 +18,5 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+
 </xs:schema>
