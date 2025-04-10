@@ -80,7 +80,7 @@
 		<dependency>
 			<groupId>org.springframework.ws</groupId>
 			<artifactId>spring-ws-core</artifactId>
-			<version>4.0.12</version>
+<!--			<version>4.0.12</version>-->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -91,6 +91,17 @@
 			<groupId>org.codehaus.mojo</groupId>
 			<artifactId>jaxb2-maven-plugin</artifactId>
 			<version>3.2.0</version>
+		</dependency>
+		<!-- Spring JDBC -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+<!--			<version>3.4.3</version>-->
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 	<build>
@@ -167,6 +178,7 @@
 				<configuration>
 					<sources>
 						<source>${project.basedir}/src/main/resources/helloWorld.xsd</source>
+						<source>${project.basedir}/src/main/resources/product.xsd</source>
 					</sources>
 					<packageName>com.example.demo.webservice</packageName>
 					<outputDirectory>${project.basedir}/generated/jaxb</outputDirectory>
