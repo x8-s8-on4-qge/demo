@@ -27,6 +27,7 @@ public class ProductService {
 			response.setResult(true);
 		} catch (Exception ex) {
 			response.setResult(false);
+			ex.printStackTrace();
 		}
 
 		return response;
@@ -42,6 +43,7 @@ public class ProductService {
 			response.setResult(true);
 		} catch (Exception ex) {
 			response.setResult(false);
+			ex.printStackTrace();
 		}
 
 		return response;
@@ -56,6 +58,7 @@ public class ProductService {
 			response.setResult(true);
 		} catch (Exception ex) {
 			response.setResult(false);
+			ex.printStackTrace();
 		}
 
 		return response;
@@ -70,6 +73,7 @@ public class ProductService {
 			response.setResult(true);
 		} catch (Exception ex) {
 			response.setResult(false);
+			ex.printStackTrace();
 		}
 
 		return response;
