@@ -7,11 +7,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.dao.ProductDao;
 import com.example.demo.webservice.DeleteProductResponse;
 import com.example.demo.webservice.GetProductListResponse;
 import com.example.demo.webservice.RegistProductResponse;
 import com.example.demo.webservice.UpdateProductResponse;
-import com.example.demo.webservice.dao.ProductDao;
 
 @Component
 public class ProductService {
