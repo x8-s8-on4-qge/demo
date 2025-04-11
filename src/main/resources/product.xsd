@@ -8,9 +8,9 @@
 			<xs:element name="product_id" type="xs:unsignedShort" />
 			<xs:element name="name" type="xs:string" />
 			<xs:element name="price" type="xs:decimal" />
-			<xs:element name="description" type="xs:string" />
+			<xs:element name="description" type="xs:string" nillable="true" />
 			<xs:element name="created_at" type="xs:dateTime" />
-			<xs:element name="updated_at" type="xs:dateTime" />
+			<xs:element name="updated_at" type="xs:dateTime" nillable="true" />
 		</xs:sequence>
 	</xs:complexType>
 
@@ -20,7 +20,7 @@
 			<xs:sequence>
 				<xs:element name="name" type="xs:string" />
 				<xs:element name="price" type="xs:decimal" />
-				<xs:element name="description" type="xs:string" />
+				<xs:element name="description" type="xs:string" nillable="true" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -36,11 +36,11 @@
 	<xs:element name="getProductListRequest">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="name" type="xs:string" />
-				<xs:element name="price" type="xs:decimal" />
-				<xs:element name="description" type="xs:string" />
-				<xs:element name="created_at" type="xs:dateTime" />
-				<xs:element name="updated_at" type="xs:dateTime" />
+				<xs:element name="name" type="xs:string" nillable="true" />
+				<xs:element name="price" type="xs:decimal" nillable="true" />
+				<xs:element name="description" type="xs:string" nillable="true" />
+				<xs:element name="created_at" type="xs:dateTime" nillable="true" />
+				<xs:element name="updated_at" type="xs:dateTime" nillable="true" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -60,7 +60,7 @@
 				<xs:element name="product_id" type="xs:unsignedShort" />
 				<xs:element name="name" type="xs:string" />
 				<xs:element name="price" type="xs:decimal" />
-				<xs:element name="description" type="xs:string" />
+				<xs:element name="description" type="xs:string" nillable="true" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

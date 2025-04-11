@@ -1,4 +1,4 @@
-package com.example.demo.webservice.dao;
+package com.example.demo.dao;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.utils.DemoDateUtils;
 import com.example.demo.webservice.Product;
-import com.example.demo.webservice.utill.DemoDateUtils;
 
 @Component
 public class ProductDao {
@@ -61,15 +61,19 @@ public class ProductDao {
 			}
 			if (createdAt != null) {
 				sql.append("created_at = :createdAt AND ");
-				params.put("createdAt", createdAt);
+				params.put("createdAt", DemoDateUtils.convertXMLGregorianCalendarToTimestamp(createdAt));
 			}
 			if (updatedAt != null) {
 				sql.append("updated_at = :updatedAt AND ");
-				params.put("updatedAt", updatedAt);
+				params.put("updatedAt", DemoDateUtils.convertXMLGregorianCalendarToTimestamp(updatedAt));
 			}
 
 			sql.setLength(sql.length() - 5);
 		}
+
+		// debug用
+		System.out.println(name + "," + price + "," + description + "," + createdAt + "," + updatedAt);
+		System.out.println(DemoDateUtils.convertXMLGregorianCalendarToTimestamp(createdAt) + "," + DemoDateUtils.convertXMLGregorianCalendarToTimestamp(updatedAt));
 
 		return jdbcTemplate.query(sql.toString(), params, (rs, rowNum) -> {
 			try {

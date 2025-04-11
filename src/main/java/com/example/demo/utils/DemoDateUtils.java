@@ -1,6 +1,7 @@
-package com.example.demo.webservice.utill;
+package com.example.demo.utils;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.GregorianCalendar;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -21,4 +22,15 @@ public class DemoDateUtils {
 
 		return DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
 	}
+
+	public static Timestamp convertXMLGregorianCalendarToTimestamp(XMLGregorianCalendar xmlGregorianCalendar) {
+
+		if (xmlGregorianCalendar == null) {
+			return null;
+		}
+
+        java.util.Date date = xmlGregorianCalendar.toGregorianCalendar().getTime();
+        return new Timestamp(date.getTime());
+	}
+
 }
