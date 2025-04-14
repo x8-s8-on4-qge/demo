@@ -10,15 +10,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 public class DemoDateUtils {
 
-	public static XMLGregorianCalendar convertDateToXMLGregorianCalendar(Date date)
+	public static XMLGregorianCalendar convertDateToXMLGregorianCalendar(Timestamp timestamp)
 			throws DatatypeConfigurationException {
 
-		if (date == null) {
+		if (timestamp == null) {
 			return null;
 		}
 
 		GregorianCalendar gc = new GregorianCalendar();
-		gc.setTime(date);
+		gc.setTime(timestamp);
 
 		return DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
 	}

@@ -71,10 +71,6 @@ public class ProductDao {
 			sql.setLength(sql.length() - 5);
 		}
 
-		// debug用
-		System.out.println(name + "," + price + "," + description + "," + createdAt + "," + updatedAt);
-		System.out.println(DemoDateUtils.convertXMLGregorianCalendarToTimestamp(createdAt) + "," + DemoDateUtils.convertXMLGregorianCalendarToTimestamp(updatedAt));
-
 		return jdbcTemplate.query(sql.toString(), params, (rs, rowNum) -> {
 			try {
 				Product product = new Product();
@@ -82,8 +78,8 @@ public class ProductDao {
 				product.setName(rs.getString("name"));
 				product.setPrice(rs.getBigDecimal("price"));
 				product.setDescription(rs.getString("description"));
-				product.setCreatedAt(DemoDateUtils.convertDateToXMLGregorianCalendar(rs.getDate("created_at")));
-				product.setUpdatedAt(DemoDateUtils.convertDateToXMLGregorianCalendar(rs.getDate("updated_at")));
+				product.setCreatedAt(DemoDateUtils.convertDateToXMLGregorianCalendar(rs.getTimestamp("created_at")));
+				product.setUpdatedAt(DemoDateUtils.convertDateToXMLGregorianCalendar(rs.getTimestamp("updated_at")));
 
 				return product;
 			} catch (Exception ex) {
