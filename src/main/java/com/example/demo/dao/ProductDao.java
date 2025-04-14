@@ -24,7 +24,7 @@ public class ProductDao {
 	public Integer registProduct(String name, BigDecimal price, String description) {
 
 		String sql = new String(
-				"INSERT INTO product (name, price, description, created_at, updated_at) VALUES (:name, :price, :description, current_timestamp, null)");
+				"INSERT INTO product (name, price, description, created_at, updated_at) VALUES (:name, :price, :description, current_timestamp at time zone 'Asia/Tokyo', null)");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("name", name);
@@ -91,7 +91,7 @@ public class ProductDao {
 	public Integer updateProduct(int productId, String name, BigDecimal price, String description) {
 
 		String sql = new String(
-				"UPDATE product SET name = :name, price = :price, description = :description, updated_at = current_timestamp WHERE product_id = :productId");
+				"UPDATE product SET name = :name, price = :price, description = :description, updated_at = current_timestamp at time zone 'Asia/Tokyo' WHERE product_id = :productId");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("productId", productId);
