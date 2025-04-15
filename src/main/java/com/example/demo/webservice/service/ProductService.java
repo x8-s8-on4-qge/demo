@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.dao.ProductDao;
 import com.example.demo.webservice.DeleteProductResponse;
+import com.example.demo.webservice.GetProductByIdResponse;
+import com.example.demo.webservice.GetProductByNameResponse;
 import com.example.demo.webservice.GetProductListResponse;
 import com.example.demo.webservice.RegistProductResponse;
 import com.example.demo.webservice.UpdateProductResponse;
@@ -24,6 +26,36 @@ public class ProductService {
 
 		try {
 			productDao.registProduct(name, price, description);
+			response.setResult(true);
+		} catch (Exception ex) {
+			response.setResult(false);
+			ex.printStackTrace();
+		}
+
+		return response;
+	}
+
+	public GetProductByIdResponse getProductById(int productId) {
+
+		GetProductByIdResponse response = new GetProductByIdResponse();
+
+		try {
+			response.setProduct(productDao.getProduct(productId));
+			response.setResult(true);
+		} catch (Exception ex) {
+			response.setResult(false);
+			ex.printStackTrace();
+		}
+
+		return response;
+	}
+
+	public GetProductByNameResponse getProductByName(String name) {
+
+		GetProductByNameResponse response = new GetProductByNameResponse();
+
+		try {
+			response.setProduct(productDao.getProduct(name));
 			response.setResult(true);
 		} catch (Exception ex) {
 			response.setResult(false);
