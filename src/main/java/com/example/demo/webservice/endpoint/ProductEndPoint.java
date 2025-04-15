@@ -8,6 +8,10 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.example.demo.webservice.DeleteProductRequest;
 import com.example.demo.webservice.DeleteProductResponse;
+import com.example.demo.webservice.GetProductByIdRequest;
+import com.example.demo.webservice.GetProductByIdResponse;
+import com.example.demo.webservice.GetProductByNameRequest;
+import com.example.demo.webservice.GetProductByNameResponse;
 import com.example.demo.webservice.GetProductListRequest;
 import com.example.demo.webservice.GetProductListResponse;
 import com.example.demo.webservice.RegistProductRequest;
@@ -28,6 +32,18 @@ public class ProductEndPoint {
 	@ResponsePayload
 	public RegistProductResponse registProduct(@RequestPayload RegistProductRequest request) {
 		return productService.registProduct(request.getName(), request.getPrice(), request.getDescription());
+	}
+
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getProductByIdRequest")
+	@ResponsePayload
+	public GetProductByIdResponse getProductById(@RequestPayload GetProductByIdRequest request) {
+		return productService.getProductById(request.getProductId());
+	}
+
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getProductByNameRequest")
+	@ResponsePayload
+	public GetProductByNameResponse getProductByName(@RequestPayload GetProductByNameRequest request) {
+		return productService.getProductByName(request.getName());
 	}
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getProductListRequest")

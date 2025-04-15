@@ -1,10 +1,12 @@
 package com.example.demo.dao;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.commons.lang3.StringUtils;
@@ -32,6 +34,54 @@ public class ProductDao {
 		params.put("description", description);
 
 		return jdbcTemplate.update(sql, params);
+	}
+
+	public Product getProduct(int productId) throws DatatypeConfigurationException {
+
+		String sql = new String("SELECT * FROM product WHERE product_id = :productId");
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("productId", productId);
+
+		Map<String, Object> result = jdbcTemplate.queryForMap(sql, params);
+
+		Product product = new Product();
+		try {
+			product.setProductId((int)result.get("product_id"));
+			product.setName((String)result.get("name"));
+			product.setPrice((BigDecimal)result.get("price"));
+			product.setDescription((String)result.get("description"));
+			product.setCreatedAt(DemoDateUtils.convertDateToXMLGregorianCalendar((Timestamp)result.get("created_at")));
+			product.setUpdatedAt(DemoDateUtils.convertDateToXMLGregorianCalendar((Timestamp)result.get("updated_at")));
+		} catch (DatatypeConfigurationException ex) {
+			throw ex;
+		}
+
+		return product;
+	}
+
+	public Product getProduct(String name) throws DatatypeConfigurationException {
+
+		String sql = new String("SELECT * FROM product WHERE name = :name");
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("name", name);
+
+		Map<String, Object> result = jdbcTemplate.queryForMap(sql, params);
+
+		Product product = new Product();
+		try {
+			product.setProductId((int)result.get("product_id"));
+			product.setName((String)result.get("name"));
+			product.setPrice((BigDecimal)result.get("price"));
+			product.setDescription((String)result.get("description"));
+			product.setCreatedAt(DemoDateUtils.convertDateToXMLGregorianCalendar((Timestamp)result.get("created_at")));
+			product.setUpdatedAt(DemoDateUtils.convertDateToXMLGregorianCalendar((Timestamp)result.get("updated_at")));
+		} catch (DatatypeConfigurationException ex) {
+			throw ex;
+		}
+
+		return product;
 	}
 
 	public List<Product> getProducts(String name, BigDecimal price, String description, XMLGregorianCalendar createdAt,
@@ -70,6 +120,8 @@ public class ProductDao {
 
 			sql.setLength(sql.length() - 5);
 		}
+
+		sql.append(" ORDER BY product_id");
 
 		return jdbcTemplate.query(sql.toString(), params, (rs, rowNum) -> {
 			try {

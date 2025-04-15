@@ -14,7 +14,7 @@
 		</xs:sequence>
 	</xs:complexType>
 
-	<!-- 登録用 -->
+	<!-- 登録 -->
 	<xs:element name="registProductRequest">
 		<xs:complexType>
 			<xs:sequence>
@@ -32,7 +32,41 @@
 		</xs:complexType>
 	</xs:element>
 
-	<!-- 参照用 -->
+	<!-- 参照(ID) -->
+	<xs:element name="getProductByIdRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="product_id" type="xs:unsignedShort" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getProductByIdResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="xs:boolean" />
+				<xs:element name="product" type="tns:product" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- 参照(商品名) -->
+	<xs:element name="getProductByNameRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="name" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getProductByNameResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" type="xs:boolean" />
+				<xs:element name="product" type="tns:product" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- 参照(一覧用) -->
 	<xs:element name="getProductListRequest">
 		<xs:complexType>
 			<xs:sequence>
@@ -53,7 +87,7 @@
 		</xs:complexType>
 	</xs:element>
 
-	<!-- 更新用 -->
+	<!-- 更新 -->
 	<xs:element name="updateProductRequest">
 		<xs:complexType>
 			<xs:sequence>
@@ -72,7 +106,7 @@
 		</xs:complexType>
 	</xs:element>
 
-	<!-- 削除用 -->
+	<!-- 削除 -->
 	<xs:element name="deleteProductRequest">
 		<xs:complexType>
 			<xs:sequence>
